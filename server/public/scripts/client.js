@@ -17,7 +17,7 @@ const songsController = app.controller('SongsController', ['$http', function($ht
     })
       .then(function (response) {
         console.log('Added song:', song);
-        self.getAllSongs();
+        self.getSongs();
         self.newSong = {};
       })
       .catch(function (error) {
@@ -27,7 +27,6 @@ const songsController = app.controller('SongsController', ['$http', function($ht
   }
 
 
-  getAllSongs();
 
   self.getSongs = function(){
     $http({
@@ -35,7 +34,7 @@ const songsController = app.controller('SongsController', ['$http', function($ht
       url: '/songs'
     })
       .then(function (response) {
-        console.log('Getting all songs:', response);
+        console.log('Getting all songs:', response.data);
         self.songArray = response.data;
       })
       .catch(function (error) {
@@ -44,7 +43,7 @@ const songsController = app.controller('SongsController', ['$http', function($ht
   }
 
   
-
+self.getSongs();
   
 
 

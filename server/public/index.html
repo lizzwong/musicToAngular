@@ -15,7 +15,7 @@
   <section>
     <h2>Add a song</h2>
     <form>
-      <input ng-model="vm.newSong.name" type="text"  placeholder="Track Name">
+      <input ng-model="vm.newSong.track" type="text"  placeholder="Track Name">
       <input ng-model="vm.newSong.artist" type="text"  placeholder="Artist">
       <input ng-model="vm.newSong.date" type="date" >
       <input ng-model="vm.newSong.rank" type="number"  min=1 max=999>
@@ -26,7 +26,12 @@
     <h2>All the songs</h2>
     <table>
       <thead><tr><th>Track</th><th>Artist</th><th>Published</th><th>Rank</th></tr></thead>
-      <tbody ng-repeat="song in vm.songArray"></tbody>
+      <tbody ng-repeat="song in vm.songArray">
+        <th>{{song.track}}</th>
+        <th>{{song.artist}}</th>
+        <th>{{song.date}}</th>
+        <th>{{song.rank}}</th>
+      </tbody>
     </table>
   </section>
 </main>
