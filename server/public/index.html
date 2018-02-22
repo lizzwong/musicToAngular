@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="vendors/angular.min.js"></script>
   <title>Songs</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
   <script src="vendors/jquery.js"></script>
   <script src="scripts/client.js"></script>
 </head>
@@ -17,20 +19,23 @@
     <form>
       <input ng-model="vm.newSong.track" type="text"  placeholder="Track Name">
       <input ng-model="vm.newSong.artist" type="text"  placeholder="Artist">
-      <input ng-model="vm.newSong.date" type="date" >
+      <input ng-model="vm.newSong.published" type="date" >
       <input ng-model="vm.newSong.rank" type="number"  min=1 max=999>
       <button ng-click="vm.addSong(vm.newSong)">Add</button>
     </form>
   </section>
   <section>
     <h2>All the songs</h2>
-    <table>
-      <thead><tr><th>Track</th><th>Artist</th><th>Published</th><th>Rank</th></tr></thead>
+    <table class="table" >
+      <thead><tr><th>Track</th><th>Artist</th><th>Published</th><th>Rank</th><th></th><th></th><th></th></tr></thead>
       <tbody ng-repeat="song in vm.songArray">
-        <th>{{song.track}}</th>
-        <th>{{song.artist}}</th>
-        <th>{{song.date}}</th>
-        <th>{{song.rank}}</th>
+        <th ng-hide="song.editing" >{{song.track}}</th>
+        <th ng-hide="song.editing" >{{song.artist}}</th>
+        <th ng-hide="song.editing" >{{song.published.substring(0,10)}}</th>
+        <th ng-hide="song.editing">{{song.rank}}</th>
+        <th><button ng-click="vm.editSong(song)">Edit Song</button></th>
+        <th><button ng-click="vm.editSong(song)">Save Edit</button></th>
+        <th><button ng-click="vm.deleteSong(song)">Delete Song</button></th>
       </tbody>
     </table>
   </section>

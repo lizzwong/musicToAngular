@@ -6,17 +6,19 @@ const songsController = app.controller('SongsController', ['$http', function($ht
   let self = this;
 
   self.newSong = { };
+
   self.songArray = [ ];
   
 
-  self.addSong = function(newSong){
+  self.addSong = function(newSong) {
+    console.log(newSong),
     $http({
       method: 'POST',
       url: '/songs/add',
-      data: { song : self.newSong } 
+      data: { song: self.newSong },
     })
       .then(function (response) {
-        console.log('Added song:', song);
+        console.log('response', response.data);
         self.getSongs();
         self.newSong = {};
       })
@@ -43,6 +45,21 @@ const songsController = app.controller('SongsController', ['$http', function($ht
   }
 
   
+  self.deleteSong = function(food){
+    $http({
+      method: 'DELETE',
+      url: `/songs/${food.id}`
+    })
+    .then(function(response){
+      console.log('response', response.data);
+      self.getSongs();
+    })
+    .catch(function(error){
+      console.log('Error deleting song', error);
+      
+    })
+  }
+
 self.getSongs();
   
 
@@ -63,19 +80,19 @@ self.getSongs();
   //   })
   // }
 
-  // function deleteSong(id){
-  //   $.ajax({
-  //     type: 'DELETE',
-  //     url: `songs/${id}`,
-  //   })
-  //   .done(function (response){
-  //     console.log('Deleted song');
-  //     getAllSongs();
-  //   })
-  //   .fail(function(error) {
-  //     console.log(error);
-  //   })
-  // }
+  function deleteSong(id){
+    $.ajax({
+      type: 'DELETE',
+      url: `songs/${id}`,
+    })
+    .done(function (response){
+      console.log('Deleted song');
+      getAllSongs();
+    })
+    .fail(function(error) {
+      console.log(error);
+    })
+  }
 
   
 
